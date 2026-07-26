@@ -1,0 +1,14 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1785097507
+README.md::TextFile::-1::1785097491::0::1::::<><><>0<>0<><>::
+::res://scenes/::1785097491
+Bullet.tscn::PackedScene::-1::1785097491::0::1::::<><><>0<>0<><>::res://scripts/Bullet.gd
+Main.tscn::PackedScene::-1::1785097491::0::1::::<><><>0<>0<><>::res://scripts/Main.gd<>res://scenes/Player.tscn<>res://scripts/HUD.gd
+Player.tscn::PackedScene::-1::1785097491::0::1::::<><><>0<>0<><>::res://scripts/Player.gd
+Zombie.tscn::PackedScene::-1::1785097491::0::1::::<><><>0<>0<><>::res://scripts/Zombie.gd
+::res://scripts/::1785097491
+Bullet.gd::GDScript::5035003812726451821::1785097491::0::1::::<>Area2D<><>0<>0<><>::
+HUD.gd::GDScript::3698455429935013591::1785097491::0::1::::<>CanvasLayer<><>0<>0<><>::
+Main.gd::GDScript::431132497732323558::1785097491::0::1::::<>Node2D<><>0<>0<><>::
+Player.gd::GDScript::1517069031791893294::1785097491::0::1::::<>CharacterBody2D<><>0<>0<><>::
+Zombie.gd::GDScript::6759370438348094560::1785097491::0::1::::<>CharacterBody2D<><>0<>0<><>::
