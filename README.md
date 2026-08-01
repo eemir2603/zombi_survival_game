@@ -1,6 +1,6 @@
 # Zombie Wave Survival
 
-Godot 4.3+ ile yapılmış top-down "twin-stick shooter + zombi hayatta kalma" karışımı mini oyun.
+Godot 4.3+ ile yapılmış top-down "twin-stick shooter + zombi hayatta kalma" mini oyunu.
 
 ## Nasıl çalıştırılır
 
@@ -11,39 +11,54 @@ Godot 4.3+ ile yapılmış top-down "twin-stick shooter + zombi hayatta kalma" k
 ## Kontroller
 
 - **WASD** — hareket
-- **Mouse** — nişan alma (karakter mouse'a bakar)
+- **Mouse** — nişan alma
 - **Sol tık** — ateş et
 
-## Oynanış
+## Özellikler
 
-- Zombiler ekranın kenarlarından dalga dalga geliyor.
-- Her dalgada zombi sayısı artıyor (`4 + dalga * 2`).
-- Zombi öldürünce +10 skor.
-- Zombi sana değince hasar veriyor, canın biterse "Game Over" ekranı geliyor.
-- Game Over ekranındaki "Yeniden Başla" butonu sahneyi resetliyor.
+- **Ana menü** — Başla / Çıkış, en yüksek skoru gösterir
+- **Dalga sistemi** — her dalgada zombi sayısı artar (`4 + dalga * 2`)
+- **3 zombi tipi**:
+  - Normal (kırmızı) — dengeli
+  - Hızlı (turuncu, küçük) — az can, hızlı, düşük hasar
+  - Tanky (mor, büyük) — çok can, yavaş, yüksek hasar (3. dalgadan sonra çıkar)
+- **Power-up'lar** (ekranda rastgele belirir, 10 saniyede kaybolur):
+  - Mavi — hız artışı (8 saniye)
+  - Turuncu — çoklu atış (8 saniye, 3'lü spread)
+  - Pembe — 30 can yenileme
+- **Ses efektleri** — ateş, isabet, zombi ölümü, hasar alma, power-up, dalga başlangıcı, oyun sonu (prosedürel/sentetik üretildi)
+- **Basit animasyonlar** — zombi yürüyüş salınımı, hasar flaşı, ölüm animasyonu (küçülüp kaybolma), power-up süzülme efekti
+- **Local high score** — `user://highscore.save` dosyasında saklanır, kalıcıdır
+- **Game Over ekranı** — Yeniden Başla ve Ana Menü butonları
 
 ## Proje yapısı
 
 ```
 zombie_survival/
 ├── project.godot
+├── audio/              # Prosedürel üretilmiş .wav ses efektleri
 ├── scenes/
-│   ├── Main.tscn      # Ana sahne (oyuncu, HUD, spawner)
+│   ├── MainMenu.tscn   # Ana menü
+│   ├── Main.tscn       # Oyun sahnesi (oyuncu, HUD, spawner)
 │   ├── Player.tscn
 │   ├── Zombie.tscn
-│   └── Bullet.tscn
+│   ├── Bullet.tscn
+│   └── PowerUp.tscn
 └── scripts/
-    ├── Main.gd        # Dalga yönetimi, skor, oyun sonu
-    ├── Player.gd      # Hareket, nişan, ateş, can
-    ├── Zombie.gd      # Takip AI, saldırı
-    ├── Bullet.gd      # Mermi hareketi ve hasar
-    └── HUD.gd         # Arayüz güncellemeleri
+    ├── SFX.gd          # Autoload - ses çalma havuzu
+    ├── SaveData.gd     # Autoload - high score kayıt/yükleme
+    ├── MainMenu.gd
+    ├── Main.gd         # Dalga yönetimi, spawn, skor
+    ├── Player.gd       # Hareket, ateş, power-up efektleri, can
+    ├── Zombie.gd        # 3 tip AI, animasyon, ölüm
+    ├── Bullet.gd
+    └── PowerUp.gd
 ```
 
 ## Geliştirme fikirleri (istersen ekleriz)
 
-- Farklı zombi tipleri (hızlı/tanky)
-- Power-up'lar (hız artışı, çoklu atış, can yenileme)
-- Basit sprite/animasyon ekleme (şu an düz renkli poligonlar kullanılıyor)
-- Ses efektleri (ateş, zombi ölümü, hasar alma)
-- Ana menü ve skor tablosu (local high score)
+- Farklı silahlar (shotgun, makineli)
+- Boss zombi (her 5 dalgada bir)
+- Ana menüde ses/müzik açma-kapama ayarı
+- Gerçek pixel-art sprite'lar (şu an düz renkli poligonlar kullanılıyor)
+- Online skor tablosu
