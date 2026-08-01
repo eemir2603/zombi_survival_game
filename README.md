@@ -55,7 +55,7 @@ zombie_survival/
     └── PowerUp.gd
 ```
 
-## Geliştirme fikirleri (istersen ekleriz)
+## Geliştirme fikirleri
 
 - Farklı silahlar (shotgun, makineli)
 - Boss zombi (her 5 dalgada bir)
