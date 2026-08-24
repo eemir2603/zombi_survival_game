@@ -22,12 +22,14 @@ signal weapon_changed(weapon_name)
 signal died
 
 const BulletScene = preload("res://scenes/Bullet.tscn")
+const CrosshairTexture = preload("res://sprites/ui/crosshair.png")
 
 func _ready():
 	add_to_group("player")
 	health = max_health
 	health_changed.emit(health, max_health)
 	weapon_changed.emit(weapons[current_weapon].name)
+	Input.set_custom_mouse_cursor(CrosshairTexture, Input.CURSOR_ARROW, Vector2(20, 20))
 
 func _physics_process(delta):
 	if speed_boost_timer > 0:

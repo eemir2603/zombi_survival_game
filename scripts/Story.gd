@@ -81,3 +81,40 @@ static func diary_log_5() -> Array:
 	return [
 		{"speaker": "Ryan's Journal", "portrait": portrait_ryan, "text": "Diane said she's been running this floor alone for two days. Didn't ask her to come with me. She offered before I could."},
 	]
+
+static func chapter3_intro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Route 9. Concrete barriers, sandbags, a downed HMMWV blocking half the road."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Still soldiers here. Good - if anyone knows where that convoy went, it's them."},
+	]
+
+static func chapter3_briggs_dialogue() -> Array:
+	return [
+		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "This is a restricted checkpoint, civilian. State your business or turn around."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Ryan Cole, 3rd Battalion, discharged '19. I'm looking for my wife and daughter - a convoy came through here from the hospital."},
+		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "...3rd Battalion. Alright. Yeah, a transport came through yesterday, civilians bound for the stadium relocation site."},
+		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "Truth is, we're barely holding this line. If you help us clear this wave, I'll radio ahead and get you a lane through."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Then let's get to work, Sergeant."},
+	]
+
+static func chapter3_briggs_repeat() -> Array:
+	return [
+		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "Hold the line. Stadium's not far past this checkpoint - your family's close, Cole."},
+	]
+
+static func chapter3_outro() -> Array:
+	return [
+		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "Line's holding. Good work, Cole. I'm radioing the stadium now - they'll know you're coming."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Thank you, Sergeant. Sarah, Emma - I'm almost there."},
+		{"speaker": "???", "portrait": null, "text": "[Bolum 4 yakinda - hikaye devam edecek]"},
+	]
+
+static func diary_log_6() -> Array:
+	return [
+		{"speaker": "Ryan's Journal", "portrait": portrait_ryan, "text": "Briggs recognized my old unit patch before I even said a word. Small world, even in the middle of the end of it."},
+	]
+
+static func diary_log_7() -> Array:
+	return [
+		{"speaker": "Ryan's Journal", "portrait": portrait_ryan, "text": "One of the soldiers asked if I was scared. Told him no. Wasn't true. Scared doesn't stop you - it's what happens after that counts."},
+	]

@@ -17,8 +17,9 @@ Bölüm 1: Ryan, evine ulaşıyor — kimse yok, ama Sarah'nın bıraktığı bi
 ## Kontroller
 
 - **WASD** — hareket
-- **Mouse** — nişan alma
+- **Mouse** — nişan alma (crosshair imleç)
 - **Sol tık** — ateş et
+- **E** — yakınındaki karakterle konuş
 - **1 / 2 / 3** — silah değiştir (Tabanca / Pompalı / Tüfek)
 - **Tıkla / SPACE** — diyalogda ilerle
 
@@ -74,7 +75,9 @@ zombie_survival/
 ## Sıradaki yapılacaklar (todo)
 
 1. ~~Bölüm 2: Hastane haritası + Nurse Diane karakteri~~ ✅ eklendi
-2. Bölüm 3: Askeri Kontrol Noktası + Sergeant Briggs
-3. Bölüm 4-6: Metro/Tüneller, Mülteci Kampı Çevresi, Stadyum (final — Sarah ve Emma'ya kavuşma)
-4. Loot sistemi (zombi ölünce eşya/silah/can düşürmesi)
-5. Fikir havuzu: minimap/radar, kill streak/combo skor, şarjör/reload mekaniği
+2. ~~Bölüm 3: Askeri Kontrol Noktası + Sergeant Briggs + savaşan asker müttefikler~~ ✅ eklendi
+3. ~~Crosshair~~ ✅ eklendi
+4. Bölüm 4-6: Metro/Tüneller, Mülteci Kampı Çevresi, Stadyum (final — Sarah ve Emma'ya kavuşma)
+5. Ayarlar menüsü güncellemesi (planlandı)
+6. Loot sistemi (zombi ölünce eşya/silah/can düşürmesi)
+7. Fikir havuzu: minimap/radar, kill streak/combo skor, şarjör/reload mekaniği

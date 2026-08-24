@@ -6,6 +6,7 @@ extends Control
 @onready var volume_slider = $VBoxContainer/VolumeRow/VolumeSlider
 
 func _ready():
+	Input.set_custom_mouse_cursor(null)
 	start_button.pressed.connect(_on_start_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	start_button.mouse_entered.connect(_on_button_hover)

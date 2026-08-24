@@ -26,6 +26,7 @@ var bob_offset: float = 0.0
 signal died(zombie)
 
 func _ready():
+	add_to_group("zombie")
 	bob_offset = randf() * TAU
 	groan_timer = randf_range(0.5, 3.5)
 	match zombie_type:

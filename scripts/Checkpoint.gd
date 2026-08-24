@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var spawn_margin: float = 50.0
-const CHAPTER_TARGET_WAVE = 4
+const CHAPTER_TARGET_WAVE = 6
 
 const ZombieScene = preload("res://scenes/Zombie.tscn")
 const PowerUpScene = preload("res://scenes/PowerUp.tscn")
@@ -18,7 +18,7 @@ var chapter_complete: bool = false
 @onready var spawn_timer = $SpawnTimer
 @onready var powerup_timer = $PowerUpTimer
 @onready var dialogue_box = $DialogueBox
-@onready var diane = $Diane
+@onready var briggs = $Briggs
 
 func _ready():
 	player.health_changed.connect(_on_player_health_changed)
@@ -29,24 +29,24 @@ func _ready():
 	hud.continue_endless_requested.connect(_on_continue_endless)
 	hud.update_score(score)
 
-	diane.interacted.connect(_on_diane_interacted)
+	briggs.interacted.connect(_on_briggs_interacted)
 	spawn_diary_logs()
 	play_intro_story()
 
 func play_intro_story():
-	dialogue_box.show_dialogue(Story.chapter2_intro())
+	dialogue_box.show_dialogue(Story.chapter3_intro())
 	await dialogue_box.finished
-	dialogue_box.show_dialogue(Story.chapter2_diane_dialogue())
+	dialogue_box.show_dialogue(Story.chapter3_briggs_dialogue())
 	await dialogue_box.finished
-	diane.dialogue_lines = Story.chapter2_diane_repeat()
+	briggs.dialogue_lines = Story.chapter3_briggs_repeat()
 	start_wave()
 
-func _on_diane_interacted(lines):
+func _on_briggs_interacted(lines):
 	dialogue_box.show_dialogue(lines)
 
 func spawn_diary_logs():
-	var logs = [Story.diary_log_4(), Story.diary_log_5()]
-	var positions = [Vector2(180, 500), Vector2(980, 160)]
+	var logs = [Story.diary_log_6(), Story.diary_log_7()]
+	var positions = [Vector2(160, 470), Vector2(1000, 470)]
 	for i in logs.size():
 		var d = DiaryLogScene.instantiate()
 		d.log_lines = logs[i]
@@ -58,7 +58,7 @@ func _on_log_collected(lines):
 	dialogue_box.show_dialogue(lines)
 
 func start_wave():
-	zombies_to_spawn = 4 + wave * 2
+	zombies_to_spawn = 5 + wave * 2
 	zombies_alive = 0
 	hud.update_wave(wave)
 	SFX.play("wave_start", -4.0)
@@ -81,9 +81,9 @@ func spawn_zombie():
 
 func pick_zombie_type():
 	var roll = randf()
-	if wave >= 3 and roll < 0.25:
+	if roll < 0.3:
 		return Zombie.ZombieType.TANKY
-	elif roll < 0.5:
+	elif roll < 0.6:
 		return Zombie.ZombieType.FAST
 	return Zombie.ZombieType.NORMAL
 
@@ -122,9 +122,9 @@ func trigger_chapter_complete():
 	powerup_timer.stop()
 	var timer = get_tree().create_timer(1.0)
 	await timer.timeout
-	dialogue_box.show_dialogue(Story.chapter2_outro())
+	dialogue_box.show_dialogue(Story.chapter3_outro())
 	await dialogue_box.finished
-	hud.show_chapter_complete(score, "BOLUM 2 TAMAMLANDI", "res://scenes/Checkpoint.tscn")
+	hud.show_chapter_complete(score, "BOLUM 3 TAMAMLANDI", "")
 
 func _on_continue_endless():
 	wave += 1
