@@ -1,12 +1,10 @@
-# Zombie Wave Survival — "Coming Home" (Chapter 1)
+# Coming Home - Zombie Wave Survival
 
-Godot 4.3+ ile yapılmış, hikaye anlatan top-down "twin-stick shooter + zombi hayatta kalma" oyunu.
+Godot 4.3+ ile yapılmış, hikaye anlatan top-down "twin-stick shooter + zombi hayatta kalma" oyunu. Tamamen İngilizce.
 
 ## Hikaye
 
-**Ryan Cole**, eski asker / güvenlik görevlisi. Salgın patlak verdiğinde nöbetteydi. Şehir kilitlenince eşi **Sarah** ve kızı **Emma**'ya ulaşamadı. Onları bulmak için harabeye dönen şehri baştan sona geçiyor.
-
-Bölüm 1: Ryan, evine ulaşıyor — kimse yok, ama Sarah'nın bıraktığı bir not var. Hastaneye gitmişler. Sokakları zombilerden temizleyip yola koyulması gerekiyor.
+**Ryan Cole**, eski asker / güvenlik görevlisi. Salgın patlak verdiğinde nöbetteydi. Şehir kilitlenince eşi **Sarah** ve kızı **Emma**'ya ulaşamadı. Onları bulmak için harabeye dönen şehri baştan sona geçiyor: mahalle → hastane → askeri kontrol noktası → metro → tünel (boss ile final) → (devamı geliyor) stadyum.
 
 ## Nasıl çalıştırılır
 
@@ -16,68 +14,74 @@ Bölüm 1: Ryan, evine ulaşıyor — kimse yok, ama Sarah'nın bıraktığı bi
 
 ## Kontroller
 
-- **WASD** — hareket
-- **Mouse** — nişan alma (crosshair imleç)
-- **Sol tık** — ateş et
-- **E** — yakınındaki karakterle konuş
-- **1 / 2 / 3** — silah değiştir (Tabanca / Pompalı / Tüfek)
-- **Tıkla / SPACE** — diyalogda ilerle
+- **WASD** — move
+- **Mouse** — aim (crosshair cursor, ayarlanabilir)
+- **Left click** — shoot
+- **R** — reload
+- **E** — talk to nearby character
+- **F** — toggle flashlight (sadece Tunnel bölümünde)
+- **1 / 2 / 3 / 4** — switch weapon (Pistol / Shotgun / Rifle / Rocket Launcher — roket atarı boss'u yenince açılıyor)
+- **Click / SPACE** — advance dialogue
 
-## Özellikler
+## Bölümler
 
-- **Hikaye/ara sahne sistemi** — portre + karakter adı + daktilo efektli yazı, tıklayarak ilerlenen diyalog kutusu (`DialogueBox`)
-- **Bölüm 1 anlatısı** — açılış sahnesi, Sarah'nın notu, 5 dalga sonunda bölüm kapanışı
-- **Toplanabilir günlükler** — haritada saklı 3 adet "Ryan's Journal" notu, ek arka hikaye anlatıyor
-- **Bölüm tamamlama ekranı** — "Sonsuz Moda Devam Et" (mevcut sistemle sınırsız oynanış) veya "Ana Menü"
-- **Ana menü** — Başla / Çıkış, ses seviyesi slider'ı, en yüksek skor gösterimi
-- **Dalga sistemi** — her dalgada zombi sayısı artar
-- **3 zombi tipi** — Normal, Hızlı, Tanky (kendi sprite'ları ve istatistikleriyle)
-- **3 silah** (1/2/3 ile değiştirilir) — Tabanca, Pompalı, Tüfek
-- **Power-up'lar** — hız artışı, çoklu atış, can yenileme
-- **Ses efektleri** — hepsi prosedürel/sentetik üretildi (ateş, isabet, zombi ölümü, zombi inleme, hasar, power-up, dalga başlangıcı, oyun sonu, menü tıklaması)
-- **Karakter portreleri ve sprite'lar** — kod ile üretilmiş görseller
-- **Local high score** — kalıcı olarak saklanır
+1. **Neighborhood** — açılış, Sarah'nın notu, günlükler
+2. **Hospital** — Nurse Diane (konuşulabilir NPC), yatak/araba engelleri
+3. **Military Checkpoint** — Sgt. Briggs + 2 asker müttefik (otomatik olarak zombilere ateş ediyorlar), devrilmiş askeri araç
+4. **Subway Terminal + Tunnel** — iki parçalı bölüm:
+   - Terminal: cesetler, kan izleri, kaçan insanlardan kalan notlar
+   - Tunnel: **karanlık**, F ile açılan fener ışığı (gerçek Godot 2D lighting), sonunda **boss savaşı**
+5-6. Yakında
 
-## Bilinen düzeltmeler
+## Boss: Mutated Horror
 
-- **[Düzeltildi]** Zombiler fiziksel çarpışma nedeniyle oyuncuya saldırı-tetikleme mesafesinden daha yakına gelemiyordu, bu yüzden hasar veremiyorlardı. Saldırı mesafeleri artık fiziksel çarpışma mesafesini kapsayacak şekilde ayarlandı.
+Tünelin sonunda bekleyen dev, çok-gözlü mutant. Uzaktan biyolojik/kimyasal atık parçaları fırlatıyor (kaçınılabilir), yakına gelirse ağır melee hasarı veriyor. Ekranın üstünde can barı görünüyor. Yenilince **Roket Atarı** bırakıyor — bir sonraki bölümde kullanılabilir.
+
+## Ayarlar Menüsü
+
+Ana menüden "SETTINGS" ile erişilir:
+- **Volume** — ses seviyesi
+- **Crosshair** — Classic / Dot / Cross / Off
+- **Character Color** — Green / Blue / Red / Grey
+- **Show FPS** — sağ üstte FPS sayacı
+
+Tüm ayarlar ve high score kalıcı olarak diskte saklanır (`user://save_data.json`).
+
+## Mermi/Şarjör Sistemi
+
+- **Pistol** — sınırsız mermi
+- **Shotgun** — 6 mermi/şarjör × 4 şarjör (24 toplam)
+- **Rifle** — 30 mermi/şarjör × 4 şarjör (120 toplam)
+- **Rocket Launcher** — 1 mermi/şarjör × 4 şarjör (boss'tan sonra açılır)
+
+**R** ile şarjör değiştir. Zombiler ölünce şansla **mermi paketi** (sarı) veya **can paketi** (kırmızı) düşürüyor.
 
 ## Proje yapısı
 
 ```
 zombie_survival/
 ├── project.godot
-├── audio/               # Prosedürel üretilmiş .wav ses efektleri
-├── sprites/              # Prosedürel üretilmiş .png karakter/UI/portre görselleri
+├── audio/                # Prosedürel üretilmiş .wav ses efektleri
+├── sprites/               # Prosedürel üretilmiş .png karakter/UI/portre/dekor görselleri
 ├── scenes/
-│   ├── MainMenu.tscn
-│   ├── Main.tscn
-│   ├── DialogueBox.tscn  # Yeniden kullanılabilir diyalog/ara sahne sistemi
-│   ├── DiaryLog.tscn     # Toplanabilir hikaye günlüğü
-│   ├── Player.tscn
-│   ├── Zombie.tscn
-│   ├── Bullet.tscn
-│   └── PowerUp.tscn
+│   ├── MainMenu.tscn, Settings.tscn
+│   ├── Main.tscn, Hospital.tscn, Checkpoint.tscn, Subway.tscn, Tunnel.tscn
+│   ├── DialogueBox.tscn, Npc.tscn, Ally.tscn, Obstacle.tscn
+│   ├── Player.tscn, Zombie.tscn, Boss.tscn, Bullet.tscn, BossProjectile.tscn
+│   ├── PowerUp.tscn, Loot.tscn, DiaryLog.tscn
 └── scripts/
-    ├── SFX.gd            # Autoload - ses çalma havuzu
-    ├── SaveData.gd       # Autoload - high score kayıt/yükleme
-    ├── Story.gd          # Bölüm 1 diyalog verileri
-    ├── DialogueBox.gd
-    ├── DiaryLog.gd
-    ├── MainMenu.gd
-    ├── Main.gd
-    ├── Player.gd
-    ├── Zombie.gd
-    ├── Bullet.gd
-    └── PowerUp.gd
+    ├── SFX.gd, SaveData.gd          # Autoload'lar
+    ├── Story.gd                     # Tum diyalog verileri
+    ├── DialogueBox.gd, Npc.gd, Ally.gd, Obstacle.gd
+    ├── MainMenu.gd, Settings.gd
+    ├── Main.gd, Hospital.gd, Checkpoint.gd, Subway.gd, Tunnel.gd
+    ├── Player.gd, Zombie.gd, Boss.gd, Bullet.gd, BossProjectile.gd
+    └── PowerUp.gd, Loot.gd, DiaryLog.gd
 ```
 
 ## Sıradaki yapılacaklar (todo)
 
-1. ~~Bölüm 2: Hastane haritası + Nurse Diane karakteri~~ ✅ eklendi
-2. ~~Bölüm 3: Askeri Kontrol Noktası + Sergeant Briggs + savaşan asker müttefikler~~ ✅ eklendi
-3. ~~Crosshair~~ ✅ eklendi
-4. Bölüm 4-6: Metro/Tüneller, Mülteci Kampı Çevresi, Stadyum (final — Sarah ve Emma'ya kavuşma)
-5. Ayarlar menüsü güncellemesi (planlandı)
-6. Loot sistemi (zombi ölünce eşya/silah/can düşürmesi)
-7. Fikir havuzu: minimap/radar, kill streak/combo skor, şarjör/reload mekaniği
+1. Bölüm 5-6: Refugee Camp Outskirts, Stadium (final — Sarah ve Emma'ya kavuşma)
+2. Görsel/animasyon iyileştirmeleri (bu iskelet tamamlanınca planlanan)
+3. Kill streak/combo skor sistemi
+4. Minimap/radar

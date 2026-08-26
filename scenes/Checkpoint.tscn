@@ -76,21 +76,21 @@ offset_left = 20.0
 offset_top = 16.0
 offset_right = 260.0
 offset_bottom = 46.0
-text = "Can: 100 / 100"
+text = "Health: 100 / 100"
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
 offset_left = 20.0
 offset_top = 46.0
 offset_right = 260.0
 offset_bottom = 76.0
-text = "Skor: 0"
+text = "Score: 0"
 
 [node name="WaveLabel" type="Label" parent="HUD"]
 offset_left = 20.0
 offset_top = 76.0
 offset_right = 260.0
 offset_bottom = 106.0
-text = "Dalga: 1"
+text = "Wave: 1"
 
 [node name="HighScoreLabel" type="Label" parent="HUD"]
 offset_left = 20.0
@@ -98,15 +98,54 @@ offset_top = 106.0
 offset_right = 260.0
 offset_bottom = 136.0
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
-text = "Rekor: 0"
+text = "Best: 0"
 
 [node name="WeaponLabel" type="Label" parent="HUD"]
 offset_left = 20.0
 offset_top = 136.0
-offset_right = 420.0
+offset_right = 460.0
 offset_bottom = 166.0
 theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
-text = "Silah: Tabanca  (1/2/3 ile degistir)"
+text = "Weapon: Pistol  (1/2/3 to switch, R to reload)"
+
+[node name="AmmoLabel" type="Label" parent="HUD"]
+offset_left = 20.0
+offset_top = 166.0
+offset_right = 260.0
+offset_bottom = 196.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.6, 1)
+text = "Ammo: Infinite"
+
+[node name="FpsLabel" type="Label" parent="HUD"]
+offset_left = 1030.0
+offset_top = 16.0
+offset_right = 1132.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.6, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "FPS: 60"
+horizontal_alignment = 2
+
+[node name="BossHealthContainer" type="VBoxContainer" parent="HUD"]
+offset_left = 326.0
+offset_top = 16.0
+offset_right = 826.0
+offset_bottom = 60.0
+theme_override_constants/separation = 4
+
+[node name="BossNameLabel" type="Label" parent="HUD/BossHealthContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "BOSS"
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="HUD/BossHealthContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 18)
+max_value = 100.0
+value = 100.0
+show_percentage = false
 
 [node name="GameOverPanel" type="Panel" parent="HUD"]
 process_mode = 3
@@ -124,17 +163,17 @@ offset_bottom = 210.0
 theme_override_constants/separation = 12
 
 [node name="GameOverLabel" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
-text = "Oldun!"
+text = "You Died"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="RestartButton" type="Button" parent="HUD/GameOverPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Yeniden Basla"
+text = "Retry"
 
 [node name="MainMenuButton" type="Button" parent="HUD/GameOverPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Ana Menu"
+text = "Main Menu"
 
 [node name="ChapterCompletePanel" type="Panel" parent="HUD"]
 process_mode = 3
@@ -152,19 +191,19 @@ offset_bottom = 260.0
 theme_override_constants/separation = 12
 
 [node name="ChapterLabel" type="Label" parent="HUD/ChapterCompletePanel/VBoxContainer"]
-text = "BOLUM 3 TAMAMLANDI"
+text = "CHAPTER 3 COMPLETE"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="NextChapterButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 visible = false
-text = "Bolum 4'e Gec"
+text = "Go to Chapter 4"
 
 [node name="ContinueButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Sonsuz Moda Devam Et"
+text = "Continue Endless Mode"
 
 [node name="ChapterMenuButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Ana Menu"
+text = "Main Menu"

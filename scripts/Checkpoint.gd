@@ -6,6 +6,7 @@ const CHAPTER_TARGET_WAVE = 6
 const ZombieScene = preload("res://scenes/Zombie.tscn")
 const PowerUpScene = preload("res://scenes/PowerUp.tscn")
 const DiaryLogScene = preload("res://scenes/DiaryLog.tscn")
+const LootScene = preload("res://scenes/Loot.tscn")
 
 var wave: int = 1
 var zombies_alive: int = 0
@@ -27,6 +28,7 @@ func _ready():
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	powerup_timer.timeout.connect(_on_powerup_timer_timeout)
 	hud.continue_endless_requested.connect(_on_continue_endless)
+	player.ammo_changed.connect(hud.update_ammo)
 	hud.update_score(score)
 
 	briggs.interacted.connect(_on_briggs_interacted)
@@ -100,11 +102,26 @@ func get_random_spawn_position() -> Vector2:
 		_:
 			return Vector2(-spawn_margin, randf_range(0, vp.y))
 
-func _on_zombie_died(_zombie):
+func _on_zombie_died(zombie):
+	var drop_pos = zombie.global_position
 	zombies_alive -= 1
 	score += 10
 	hud.update_score(score)
+	maybe_spawn_loot(drop_pos)
 	check_wave_complete()
+
+func maybe_spawn_loot(pos):
+	var roll = randf()
+	if roll < 0.22:
+		var l = LootScene.instantiate()
+		l.type = Loot.Type.AMMO
+		add_child(l)
+		l.global_position = pos
+	elif roll < 0.35:
+		var l = LootScene.instantiate()
+		l.type = Loot.Type.HEALTH
+		add_child(l)
+		l.global_position = pos
 
 func check_wave_complete():
 	if zombies_to_spawn <= 0 and zombies_alive <= 0:
@@ -124,7 +141,7 @@ func trigger_chapter_complete():
 	await timer.timeout
 	dialogue_box.show_dialogue(Story.chapter3_outro())
 	await dialogue_box.finished
-	hud.show_chapter_complete(score, "BOLUM 3 TAMAMLANDI", "")
+	hud.show_chapter_complete(score, "CHAPTER 3 COMPLETE", "res://scenes/Subway.tscn")
 
 func _on_continue_endless():
 	wave += 1

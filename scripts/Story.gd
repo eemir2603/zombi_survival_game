@@ -106,7 +106,7 @@ static func chapter3_outro() -> Array:
 	return [
 		{"speaker": "Sgt. Briggs", "portrait": portrait_briggs, "text": "Line's holding. Good work, Cole. I'm radioing the stadium now - they'll know you're coming."},
 		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Thank you, Sergeant. Sarah, Emma - I'm almost there."},
-		{"speaker": "???", "portrait": null, "text": "[Bolum 4 yakinda - hikaye devam edecek]"},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "There's a subway entrance a few blocks up - fastest way to cross the city without more checkpoints slowing me down."},
 	]
 
 static func diary_log_6() -> Array:
@@ -117,4 +117,53 @@ static func diary_log_6() -> Array:
 static func diary_log_7() -> Array:
 	return [
 		{"speaker": "Ryan's Journal", "portrait": portrait_ryan, "text": "One of the soldiers asked if I was scared. Told him no. Wasn't true. Scared doesn't stop you - it's what happens after that counts."},
+	]
+
+static var portrait_torn_note = portrait_note
+
+static func chapter4a_intro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Subway terminal. Turnstiles busted open, emergency lights still flickering."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Looks like half the city tried to squeeze through here. Judging by what's left of them, not everyone made it."},
+	]
+
+static func chapter4a_outro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Platform's clear. There's only one way from here - down into the tunnel."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "No power down there. I'll need my flashlight - and steady hands."},
+	]
+
+static func found_note_1() -> Array:
+	return [
+		{"speaker": "Torn Note", "portrait": portrait_torn_note, "text": "\"If anyone finds this - the 9:15 never came. We're heading down the tunnel on foot. God help us.\""},
+	]
+
+static func found_note_2() -> Array:
+	return [
+		{"speaker": "Torn Note", "portrait": portrait_torn_note, "text": "\"My brother didn't make it past the platform. I couldn't stop long enough to be sure he was really gone. I still hear him.\""},
+	]
+
+static func found_note_3() -> Array:
+	return [
+		{"speaker": "Torn Note", "portrait": portrait_torn_note, "text": "\"Stadium relocation convoys are still running as of this morning. If you're reading this - keep moving. Don't stop for the sounds in the dark.\""},
+	]
+
+static func chapter4b_intro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Pitch black. Can't see three feet in front of me without the light."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Press F. Steady the beam. Move slow."},
+	]
+
+static func boss_intro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "...That's not a person. That's not even one of them. Whatever that thing is, it's massive."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "It's between me and the way out. No going around it. Time to finish this."},
+	]
+
+static func boss_outro() -> Array:
+	return [
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "Down. Finally down."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "It was carrying military ordnance - a rocket launcher, still intact. Whoever it used to be, they were armed for a reason."},
+		{"speaker": "Ryan Cole", "portrait": portrait_ryan, "text": "I'll take it. Whatever's waiting at that stadium, I'm not walking in unprepared."},
+		{"speaker": "???", "portrait": null, "text": "[Chapter 5 coming soon - the story continues]"},
 	]
