@@ -1,6 +1,15 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1788466519
+::res://::1791311959
+click.wav::AudioStreamWAV::1923541831733452162::1791311627::1791312012::1::::<><><>0<>0<>0f828b29b050dfaf2561211d7047cb61<>res://.godot/imported/click.wav-eb238f6fd9fd34c5c027498744914435.sample::
+game_over.wav::AudioStreamWAV::617708658113562649::1791311627::1791312012::1::::<><><>0<>0<>f7339e06d2cf86223ef4424e60a570dc<>res://.godot/imported/game_over.wav-82808b3f400b454795a487aa742a4901.sample::
+hit.wav::AudioStreamWAV::7249670765430444708::1791311627::1791312012::1::::<><><>0<>0<>da3daf314eeae34eed6908f4c5277aa1<>res://.godot/imported/hit.wav-11fbf281db96cf04a6ea741a364b0852.sample::
+player_hurt.wav::AudioStreamWAV::802563356096497336::1791311627::1791312012::1::::<><><>0<>0<>edace5ecc9f253532840a6f419061e85<>res://.godot/imported/player_hurt.wav-07c1b47cfa6491d919d933db4cd04e72.sample::
+powerup.wav::AudioStreamWAV::4185899865486184578::1791311627::1791312012::1::::<><><>0<>0<>e255b8e3b88f60797ff87225fe5524a1<>res://.godot/imported/powerup.wav-e49d4bc73c8a8a65007b0b997e91413b.sample::
 README.md::TextFile::-1::1787784090::0::1::::<><><>0<>0<><>::
+shoot.wav::AudioStreamWAV::6888563660282057596::1791311627::1791312012::1::::<><><>0<>0<>d56462df62eab621e62d4d0517e92eec<>res://.godot/imported/shoot.wav-82b80f4af7c1d6c25a1e5afade00734c.sample::
+wave_start.wav::AudioStreamWAV::8008874985240237337::1791311627::1791312012::1::::<><><>0<>0<>48f86ef4294637e6638f640e9acad051<>res://.godot/imported/wave_start.wav-bbb2e234ebd3646bc9ce0628a189616c.sample::
+zombie_death.wav::AudioStreamWAV::1824971291763764917::1791311627::1791312012::1::::<><><>0<>0<>c762b35067e6a0079b8b535dfa6fd337<>res://.godot/imported/zombie_death.wav-b80d241d56e2a5878239648f60c84551.sample::
+zombie_groan.wav::AudioStreamWAV::6836214720144233792::1791311627::1791312012::1::::<><><>0<>0<>339fadeba9992fc795ccd049e59bd95f<>res://.godot/imported/zombie_groan.wav-4eb8515ccf74ebf96a58a098d16d350c.sample::
 ::res://audio/::1787784560
 click.wav::AudioStreamWAV::6897914401316342382::1786834040::1787784560::1::::<><><>0<>0<>a654b9a7c0a8b5bb86cdcf8deaecbf18<>res://.godot/imported/click.wav-fd13f10d6f727710e39f04648321cf68.sample::
 game_over.wav::AudioStreamWAV::369593801686686200::1786834040::1787784560::1::::<><><>0<>0<>fdbac1169f3050a5a8067d54f0360677<>res://.godot/imported/game_over.wav-93bb809a2bb5c7d8aee9c599f7f43ae9.sample::
