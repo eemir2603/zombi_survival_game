@@ -15,6 +15,10 @@ Ryan Cole is a former soldier turned security contractor. He was on duty when th
 
  -Hit Play (▶).
 
+ OR 
+
+ You can play on itchio
+
 # Controls
 Key / Input	Action
 WASD	Movement
