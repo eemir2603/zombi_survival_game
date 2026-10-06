@@ -1,19 +1,20 @@
-##Coming Home — Zombie Wave Survival
+## Coming Home — Zombie Wave Survival
 
-#A story-driven, top-down twin-stick shooter and zombie survival game, built with Godot 4.3+.
-The Story
+# A story-driven, top-down twin-stick shooter and zombie survival game, built with Godot 4.3+.
 
- #Ryan Cole is a former soldier turned security contractor. He was on duty when the outbreak first hit. By the time the city went into full lockdown, he was completely cut off from his wife, Sarah, and their daughter, Emma. Now, he has to fight his way across the ruins of a collapsed city to find them and bring them home.
+#The Story
+
+Ryan Cole is a former soldier turned security contractor. He was on duty when the outbreak first hit. By the time the city went into full lockdown, he was completely cut off from his wife, Sarah, and their daughter, Emma. Now, he has to fight his way across the ruins of a collapsed city to find them and bring them home.
  
- #How to Play
+# How to Play
 
- Download Godot 4.3+.
+ -Download Godot 4.3+.
 
- Click "Import" and select the project.godot file in this folder.
+ -Click "Import" and select the project.godot file in this folder.
 
- Hit Play (▶).
+ -Hit Play (▶).
 
-#Controls
+# Controls
 Key / Input	Action
 WASD	Movement
 Mouse	Aim (crosshair style can be changed in Settings)
@@ -24,7 +25,7 @@ F	Toggle Flashlight (Tunnel level only)
 1 / 2 / 3 / 4	Switch Weapons
 Click / SPACE	Advance dialogue
 
-#Chapters
+# Chapters
 
   1.The Neighborhood — The opening sequence. Features Sarah's note and 3 lore journals.
 
@@ -38,7 +39,7 @@ Click / SPACE	Advance dialogue
 
   6.The Stadium (NEW — FINALE) — A unique three-phase final chapter. Details below.
 
-#Chapter 6: The Stadium — New Gameplay Mechanics
+# Chapter 6: The Stadium — New Gameplay Mechanics
 
 This chapter structurally breaks away from the rest of the game:
 
@@ -68,7 +69,7 @@ Technical Notes
 
   -DialogueBox.gd includes get_viewport() null-checks and is_inside_tree() safeguards to prevent crashing during scene transitions.
 
-##Project Structure
+# Project Structure
 Plaintext
 
 zombie_survival/
