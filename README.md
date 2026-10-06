@@ -75,9 +75,13 @@ Plaintext
 
 zombie_survival/
 ├── project.godot
+
 ├── audio/     # 9 procedurally generated .wav files
+
 ├── sprites/   # 13 character & 28 UI/environment .png files
+
 ├── scenes/    # 22 .tscn scene files
+
 └── scripts/   # 25 .gd scripts
 
 -- Roadmap / What's Next --
