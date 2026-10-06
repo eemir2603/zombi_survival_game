@@ -79,7 +79,7 @@ zombie_survival/
 ├── scenes/    # 22 .tscn scene files
 └── scripts/   # 25 .gd scripts
 
-Roadmap / What's Next
+-- Roadmap / What's Next --
 
   1.Visual & Animation Polish: Implementing walk cycles, particle effects, and screen shake.
 
