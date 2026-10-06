@@ -58,7 +58,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="VolumeLabel" type="Label" parent="VBoxContainer/VolumeRow"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.8, 1)
 text = "Volume"
@@ -76,7 +76,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="CrosshairLabel" type="Label" parent="VBoxContainer/CrosshairRow"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.8, 1)
 text = "Crosshair"
@@ -91,7 +91,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="ColorLabel" type="Label" parent="VBoxContainer/ColorRow"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.8, 1)
 text = "Character Color"
@@ -106,7 +106,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="FpsLabel" type="Label" parent="VBoxContainer/FpsRow"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.8, 1)
 text = "Show FPS"

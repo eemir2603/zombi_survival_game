@@ -20,8 +20,7 @@ func _ready():
 	crosshair_option.add_item("Dot", 1)
 	crosshair_option.add_item("Cross", 2)
 	crosshair_option.add_item("Off", 3)
-	var current_idx = crosshair_keys.find(SaveData.crosshair_style)
-	crosshair_option.select(max(current_idx, 0))
+	crosshair_option.select(max(crosshair_keys.find(SaveData.crosshair_style), 0))
 	crosshair_option.item_selected.connect(_on_crosshair_selected)
 
 	color_option.clear()
@@ -29,8 +28,7 @@ func _ready():
 	color_option.add_item("Blue", 1)
 	color_option.add_item("Red", 2)
 	color_option.add_item("Grey", 3)
-	var color_idx = color_keys.find(SaveData.player_color)
-	color_option.select(max(color_idx, 0))
+	color_option.select(max(color_keys.find(SaveData.player_color), 0))
 	color_option.item_selected.connect(_on_color_selected)
 
 	fps_checkbox.button_pressed = SaveData.show_fps

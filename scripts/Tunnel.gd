@@ -1,25 +1,28 @@
 extends Node2D
 
+@export var spawn_margin: float = 50.0
 const CHAPTER_TARGET_WAVE = 3
 
 const ZombieScene = preload("res://scenes/Zombie.tscn")
 const PowerUpScene = preload("res://scenes/PowerUp.tscn")
+const DiaryLogScene = preload("res://scenes/DiaryLog.tscn")
 const LootScene = preload("res://scenes/Loot.tscn")
 const BossScene = preload("res://scenes/Boss.tscn")
+const FlashlightTexture = preload("res://sprites/ui/flashlight_cone.png")
 
 var wave: int = 1
 var zombies_alive: int = 0
 var zombies_to_spawn: int = 0
 var score: int = 0
-var waves_done: bool = false
+var chapter_complete: bool = false
 var f_was_pressed: bool = false
+var flashlight: PointLight2D
 
 @onready var player = $Player
 @onready var hud = $HUD
 @onready var spawn_timer = $SpawnTimer
 @onready var powerup_timer = $PowerUpTimer
 @onready var dialogue_box = $DialogueBox
-@onready var flashlight = $Player/Flashlight
 
 func _ready():
 	score = SaveData.carry_score
@@ -31,11 +34,21 @@ func _ready():
 	powerup_timer.timeout.connect(_on_powerup_timer_timeout)
 	hud.continue_endless_requested.connect(_on_continue_endless)
 	hud.update_score(score)
+	setup_flashlight()
 	play_intro_story()
+
+func setup_flashlight():
+	flashlight = PointLight2D.new()
+	flashlight.texture = FlashlightTexture
+	flashlight.color = Color(1, 0.95, 0.85, 1)
+	flashlight.energy = 1.4
+	flashlight.texture_scale = 2.4
+	flashlight.enabled = false
+	player.add_child(flashlight)
 
 func _process(_delta):
 	var f_pressed = Input.is_key_pressed(KEY_F)
-	if f_pressed and not f_was_pressed:
+	if f_pressed and not f_was_pressed and flashlight != null and is_instance_valid(flashlight):
 		flashlight.enabled = not flashlight.enabled
 		SFX.play("click", -10.0)
 	f_was_pressed = f_pressed
@@ -80,13 +93,13 @@ func get_random_spawn_position() -> Vector2:
 	var edge = randi() % 4
 	match edge:
 		0:
-			return Vector2(randf_range(0, vp.x), -50)
+			return Vector2(randf_range(0, vp.x), -spawn_margin)
 		1:
-			return Vector2(vp.x + 50, randf_range(0, vp.y))
+			return Vector2(vp.x + spawn_margin, randf_range(0, vp.y))
 		2:
-			return Vector2(randf_range(0, vp.x), vp.y + 50)
+			return Vector2(randf_range(0, vp.x), vp.y + spawn_margin)
 		_:
-			return Vector2(-50, randf_range(0, vp.y))
+			return Vector2(-spawn_margin, randf_range(0, vp.y))
 
 func _on_zombie_died(zombie):
 	var drop_pos = zombie.global_position
@@ -98,21 +111,21 @@ func _on_zombie_died(zombie):
 
 func maybe_spawn_loot(pos):
 	var roll = randf()
-	if roll < 0.25:
+	if roll < 0.22:
 		var l = LootScene.instantiate()
 		l.type = Loot.Type.AMMO
 		add_child(l)
 		l.global_position = pos
-	elif roll < 0.4:
+	elif roll < 0.35:
 		var l = LootScene.instantiate()
 		l.type = Loot.Type.HEALTH
 		add_child(l)
 		l.global_position = pos
 
 func check_wave_complete():
-	if zombies_to_spawn <= 0 and zombies_alive <= 0 and not waves_done:
+	if zombies_to_spawn <= 0 and zombies_alive <= 0 and not chapter_complete:
 		if wave >= CHAPTER_TARGET_WAVE:
-			waves_done = true
+			chapter_complete = true
 			spawn_timer.stop()
 			var timer = get_tree().create_timer(1.5)
 			await timer.timeout
@@ -143,11 +156,12 @@ func _on_boss_died():
 	await timer.timeout
 	dialogue_box.show_dialogue(Story.boss_outro())
 	await dialogue_box.finished
-	hud.show_chapter_complete(score, "CHAPTER 4 COMPLETE", "")
+	SaveData.carry_score = score
+	hud.show_chapter_complete(score, "CHAPTER 4 COMPLETE", "res://scenes/Camp.tscn")
 
 func _on_continue_endless():
 	wave += 1
-	waves_done = false
+	chapter_complete = false
 	start_wave()
 
 func _on_powerup_timer_timeout():

@@ -2,11 +2,9 @@ extends CanvasLayer
 
 signal finished
 
-@onready var panel = $Panel
 @onready var portrait_rect = $Panel/HBoxContainer/PortraitRect
 @onready var name_label = $Panel/HBoxContainer/VBoxContainer/NameLabel
 @onready var text_label = $Panel/HBoxContainer/VBoxContainer/TextLabel
-@onready var continue_label = $Panel/ContinueLabel
 
 var lines: Array = []
 var current_index: int = 0
@@ -59,7 +57,7 @@ func _process(delta):
 		is_typing = false
 
 func _unhandled_input(event):
-	if not visible:
+	if not visible or not is_inside_tree():
 		return
 	var advance_pressed = false
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -69,7 +67,9 @@ func _unhandled_input(event):
 
 	if advance_pressed:
 		advance()
-		get_viewport().set_input_as_handled()
+		var vp = get_viewport()
+		if vp:
+			vp.set_input_as_handled()
 
 func advance():
 	if is_typing:
@@ -81,5 +81,6 @@ func advance():
 
 func end_dialogue():
 	visible = false
-	get_tree().paused = false
+	if is_inside_tree():
+		get_tree().paused = false
 	finished.emit()

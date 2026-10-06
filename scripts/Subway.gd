@@ -29,7 +29,6 @@ func _ready():
 	powerup_timer.timeout.connect(_on_powerup_timer_timeout)
 	hud.continue_endless_requested.connect(_on_continue_endless)
 	hud.update_score(score)
-
 	spawn_notes()
 	play_intro_story()
 
@@ -75,9 +74,9 @@ func spawn_zombie():
 
 func pick_zombie_type():
 	var roll = randf()
-	if roll < 0.25:
+	if wave >= 3 and roll < 0.25:
 		return Zombie.ZombieType.TANKY
-	elif roll < 0.55:
+	elif roll < 0.5:
 		return Zombie.ZombieType.FAST
 	return Zombie.ZombieType.NORMAL
 
@@ -119,14 +118,14 @@ func check_wave_complete():
 	if zombies_to_spawn <= 0 and zombies_alive <= 0:
 		if wave >= CHAPTER_TARGET_WAVE and not chapter_complete:
 			chapter_complete = true
-			transition_to_tunnel()
+			trigger_chapter_complete()
 		else:
 			wave += 1
 			var timer = get_tree().create_timer(2.0)
 			await timer.timeout
 			start_wave()
 
-func transition_to_tunnel():
+func trigger_chapter_complete():
 	spawn_timer.stop()
 	powerup_timer.stop()
 	var timer = get_tree().create_timer(1.0)

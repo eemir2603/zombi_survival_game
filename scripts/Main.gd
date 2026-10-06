@@ -24,13 +24,12 @@ func _ready():
 	player.health_changed.connect(_on_player_health_changed)
 	player.died.connect(_on_player_died)
 	player.weapon_changed.connect(hud.update_weapon)
+	player.ammo_changed.connect(hud.update_ammo)
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	powerup_timer.timeout.connect(_on_powerup_timer_timeout)
 	hud.continue_endless_requested.connect(_on_continue_endless)
-	player.ammo_changed.connect(hud.update_ammo)
 	hud.update_score(score)
-
-	spawn_diary_logs()
+	spawn_notes()
 	play_intro_story()
 
 func play_intro_story():
@@ -40,12 +39,12 @@ func play_intro_story():
 	await dialogue_box.finished
 	start_wave()
 
-func spawn_diary_logs():
-	var logs = [Story.diary_log_1(), Story.diary_log_2(), Story.diary_log_3()]
+func spawn_notes():
+	var notes = [Story.diary_log_1(), Story.diary_log_2(), Story.diary_log_3()]
 	var positions = [Vector2(140, 140), Vector2(1012, 140), Vector2(140, 500)]
-	for i in logs.size():
+	for i in notes.size():
 		var d = DiaryLogScene.instantiate()
-		d.log_lines = logs[i]
+		d.log_lines = notes[i]
 		add_child(d)
 		d.global_position = positions[i]
 		d.log_collected.connect(_on_log_collected)
@@ -135,7 +134,7 @@ func trigger_chapter_complete():
 	await timer.timeout
 	dialogue_box.show_dialogue(Story.chapter1_outro())
 	await dialogue_box.finished
-	hud.show_chapter_complete(score, "BOLUM 1 TAMAMLANDI", "res://scenes/Hospital.tscn")
+	hud.show_chapter_complete(score, "CHAPTER 1 COMPLETE", "res://scenes/Hospital.tscn")
 
 func _on_continue_endless():
 	wave += 1

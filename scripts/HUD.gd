@@ -23,6 +23,11 @@ signal continue_endless_requested
 @onready var boss_name_label = $BossHealthContainer/BossNameLabel
 @onready var boss_health_bar = $BossHealthContainer/BossHealthBar
 @onready var fps_label = $FpsLabel
+@onready var objective_container = $ObjectiveContainer
+@onready var objective_label = $ObjectiveContainer/ObjectiveLabel
+@onready var objective_progress = $ObjectiveContainer/ObjectiveProgress
+@onready var objective_health_label = $ObjectiveContainer/ObjectiveHealthLabel
+@onready var objective_health_bar = $ObjectiveContainer/ObjectiveHealthBar
 
 var next_chapter_scene: String = ""
 
@@ -30,6 +35,7 @@ func _ready():
 	game_over_panel.visible = false
 	chapter_panel.visible = false
 	boss_health_container.visible = false
+	objective_container.visible = false
 	fps_label.visible = SaveData.show_fps
 	restart_button.pressed.connect(_on_restart_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
@@ -55,7 +61,7 @@ func update_wave(wave):
 	wave_label.text = "Wave: %d" % wave
 
 func update_weapon(weapon_name):
-	weapon_label.text = "Weapon: %s  (1/2/3 to switch, R to reload)" % weapon_name
+	weapon_label.text = "Weapon: %s  (1-4 switch, R reload)" % weapon_name
 
 func update_ammo(text):
 	ammo_label.text = "Ammo: %s" % text
@@ -73,7 +79,25 @@ func update_boss_health(current: int, max_hp: int):
 func hide_boss_health():
 	boss_health_container.visible = false
 
-func show_game_over(score, wave):
+func show_objective(title: String, health_title: String):
+	objective_container.visible = true
+	objective_label.text = title
+	objective_health_label.text = health_title
+
+func update_objective_progress(elapsed: float, total: float):
+	objective_progress.max_value = total
+	objective_progress.value = elapsed
+	var remaining = max(0, int(ceil(total - elapsed)))
+	objective_label.text = "EVACUATION IN PROGRESS  -  %ds" % remaining
+
+func update_objective_health(current: int, max_hp: int):
+	objective_health_bar.max_value = max_hp
+	objective_health_bar.value = current
+
+func hide_objective():
+	objective_container.visible = false
+
+func show_game_over(score, wave, custom_title: String = ""):
 	var is_new_record = SaveData.save_high_score(score)
 	high_score_label.text = "Best: %d" % SaveData.high_score
 	game_over_panel.visible = true
@@ -84,7 +108,8 @@ func show_game_over(score, wave):
 	else:
 		record_text = "\n\nBest Score: %d" % SaveData.high_score
 
-	game_over_label.text = "You Died\nScore: %d\nWave Reached: %d%s" % [score, wave, record_text]
+	var title = custom_title if custom_title != "" else "You Died"
+	game_over_label.text = "%s\nScore: %d\nWave Reached: %d%s" % [title, score, wave, record_text]
 
 func show_chapter_complete(score, chapter_title: String = "CHAPTER COMPLETE", next_scene_path: String = ""):
 	SaveData.save_high_score(score)

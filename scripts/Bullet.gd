@@ -8,7 +8,6 @@ var lifetime: float = 2.0
 func _ready():
 	rotation = direction.angle()
 	body_entered.connect(_on_body_entered)
-
 	var timer = get_tree().create_timer(lifetime)
 	await timer.timeout
 	queue_free()

@@ -20,9 +20,11 @@ func _ready():
 	prompt.visible = false
 
 func _process(_delta):
-	prompt.visible = player_in_range
+	# gorunmez NPC (hikaye gelmeden sahnede bekleyen) etkilesime girmez
+	var active = visible and not dialogue_lines.is_empty()
+	prompt.visible = player_in_range and active
 	var e_pressed = Input.is_key_pressed(KEY_E)
-	if player_in_range and e_pressed and not e_was_pressed:
+	if active and player_in_range and e_pressed and not e_was_pressed:
 		interacted.emit(dialogue_lines)
 	e_was_pressed = e_pressed
 

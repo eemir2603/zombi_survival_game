@@ -47,9 +47,6 @@ func _ready():
 	health = max_health
 	health_changed.emit(health, max_health)
 
-	if SaveData.has_rocket_launcher:
-		unlock_weapon("rocket")
-
 	init_ammo_state()
 	weapon_changed.emit(weapons[current_weapon].name)
 	update_ammo_display()
@@ -72,9 +69,6 @@ func init_ammo_state():
 				"current": w.mag_size,
 				"reserve": w.mag_size * (w.max_mags - 1),
 			}
-
-func unlock_weapon(_key: String):
-	pass  # weapon zaten weapons sozlugunde tanimli, sadece secilebilir hale geliyor - bkz. can_use_weapon
 
 func can_use_weapon(key: String) -> bool:
 	if key == "rocket":
@@ -142,8 +136,11 @@ func reload():
 		return
 	is_reloading = true
 	SFX.play("click", -4.0)
+	update_ammo_display()
 	var timer = get_tree().create_timer(1.2)
 	await timer.timeout
+	if not is_inside_tree():
+		return
 	var needed = w.mag_size - ammo.current
 	var take = min(needed, ammo.reserve)
 	ammo.current += take

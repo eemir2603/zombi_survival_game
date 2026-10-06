@@ -1,87 +1,86 @@
-# Coming Home - Zombie Wave Survival
+# Coming Home — Zombie Wave Survival
 
-Godot 4.3+ ile yapılmış, hikaye anlatan top-down "twin-stick shooter + zombi hayatta kalma" oyunu. Tamamen İngilizce.
+Godot 4.3+ ile yapılmış, hikaye anlatan top-down twin-stick shooter / zombi hayatta kalma oyunu.
 
 ## Hikaye
 
-**Ryan Cole**, eski asker / güvenlik görevlisi. Salgın patlak verdiğinde nöbetteydi. Şehir kilitlenince eşi **Sarah** ve kızı **Emma**'ya ulaşamadı. Onları bulmak için harabeye dönen şehri baştan sona geçiyor: mahalle → hastane → askeri kontrol noktası → metro → tünel (boss ile final) → (devamı geliyor) stadyum.
+**Ryan Cole**, eski asker / güvenlik görevlisi. Salgın patlak verdiğinde nöbetteydi. Şehir kilitlenince eşi **Sarah** ve kızı **Emma**'ya ulaşamadı. Onları bulmak için harabeye dönen şehri baştan sona geçiyor.
 
 ## Nasıl çalıştırılır
 
-1. [Godot 4.3+](https://godotengine.org/download) indir ve aç.
-2. "Import" diyerek bu klasördeki `project.godot` dosyasını seç.
-3. Üstteki Play (▶) tuşuna bas.
+1. [Godot 4.3+](https://godotengine.org/download) indir.
+2. "Import" → bu klasördeki `project.godot` dosyasını seç.
+3. Play (▶).
 
 ## Kontroller
 
-- **WASD** — move
-- **Mouse** — aim (crosshair cursor, ayarlanabilir)
-- **Left click** — shoot
-- **R** — reload
-- **E** — talk to nearby character
-- **F** — toggle flashlight (sadece Tunnel bölümünde)
-- **1 / 2 / 3 / 4** — switch weapon (Pistol / Shotgun / Rifle / Rocket Launcher — roket atarı boss'u yenince açılıyor)
-- **Click / SPACE** — advance dialogue
+| Tuş | İşlev |
+|---|---|
+| WASD | Hareket |
+| Mouse | Nişan (crosshair, ayarlardan değiştirilebilir) |
+| Sol tık | Ateş |
+| R | Şarjör değiştir |
+| E | Yakındaki karakterle konuş |
+| F | El feneri (sadece Tunnel) |
+| 1 / 2 / 3 / 4 | Silah değiştir |
+| Tık / SPACE | Diyalogda ilerle |
 
 ## Bölümler
 
-1. **Neighborhood** — açılış, Sarah'nın notu, günlükler
-2. **Hospital** — Nurse Diane (konuşulabilir NPC), yatak/araba engelleri
-3. **Military Checkpoint** — Sgt. Briggs + 2 asker müttefik (otomatik olarak zombilere ateş ediyorlar), devrilmiş askeri araç
-4. **Subway Terminal + Tunnel** — iki parçalı bölüm:
-   - Terminal: cesetler, kan izleri, kaçan insanlardan kalan notlar
-   - Tunnel: **karanlık**, F ile açılan fener ışığı (gerçek Godot 2D lighting), sonunda **boss savaşı**
-5-6. Yakında
+1. **Neighborhood** — açılış, Sarah'nın notu, 3 günlük
+2. **Hospital** — Nurse Diane (NPC), yatak/araba engelleri
+3. **Military Checkpoint** — Sgt. Briggs + 2 asker müttefik, devrilmiş HMMWV
+4. **Subway Terminal → Tunnel** — cesetler/kan/notlar, sonra karanlık tünel (F ile fener) ve **boss savaşı** (Mutated Horror → Roket Atarı düşürür)
+5. **Refugee Camp Outskirts** — çamurlu kamp, **Maya Reyes** (NPC), çadırlar ve variller siper olarak, 2 sivil gönüllü müttefik, 6 dalga savunma.
+6. **Stadium** *(YENİ — FİNAL)* — üç aşamalı final. Detaylar aşağıda.
 
-## Boss: Mutated Horror
+## Bölüm 6: Stadium — yeni oynanış
 
-Tünelin sonunda bekleyen dev, çok-gözlü mutant. Uzaktan biyolojik/kimyasal atık parçaları fırlatıyor (kaçınılabilir), yakına gelirse ağır melee hasarı veriyor. Ekranın üstünde can barı görünüyor. Yenilince **Roket Atarı** bırakıyor — bir sonraki bölümde kullanılabilir.
+Diğer bölümlerden yapısal olarak farklı çalışır:
 
-## Ayarlar Menüsü
+**Faz 1 — Yaklaşma.** 3 dalga normal temizlik, konkora ulaşma.
 
-Ana menüden "SETTINGS" ile erişilir:
-- **Volume** — ses seviyesi
-- **Crosshair** — Classic / Dot / Cross / Off
-- **Character Color** — Green / Blue / Red / Grey
-- **Show FPS** — sağ üstte FPS sayacı
+**Faz 2 — Kavuşma.** Sarah ve Emma bulunur. Sarah bir saat önce kapıda ısırılmıştır; Emma'yla gelen arasında durduğu için. Otobüste tek koltuk vardır ve Sarah onu almayı reddeder.
 
-Tüm ayarlar ve high score kalıcı olarak diskte saklanır (`user://save_data.json`).
+**Faz 3 — Tahliye Savunması.** *(tamamen yeni mekanik)* Dalga saymak yok — **120 saniye** var. Zombiler kesintisiz gelir ve **%45'i oyuncuyu görmezden gelip doğrudan otobüse saldırır**. Otobüsün kendi can barı vardır (700 HP); sıfırlanırsa bölüm kaybedilir ("THE BUS IS GONE"). Bu fazda mermi/can düşme oranı yükseltilmiştir çünkü kaynak yönetimi kritiktir. Ekranda geri sayım + otobüs bütünlüğü göstergeleri.
 
-## Mermi/Şarjör Sistemi
+**Faz 4 — Final.** Otobüs dolar ve yola çıkar. **Sarah geride kalır, Emma kurtulur.** Ryan kızını alıp gider ve arkasına bakmaz, çünkü bakmayacağına söz vermiştir.
 
-- **Pistol** — sınırsız mermi
-- **Shotgun** — 6 mermi/şarjör × 4 şarjör (24 toplam)
-- **Rifle** — 30 mermi/şarjör × 4 şarjör (120 toplam)
-- **Rocket Launcher** — 1 mermi/şarjör × 4 şarjör (boss'tan sonra açılır)
+## Silahlar
 
-**R** ile şarjör değiştir. Zombiler ölünce şansla **mermi paketi** (sarı) veya **can paketi** (kırmızı) düşürüyor.
+| Silah | Şarjör | Not |
+|---|---|---|
+| Pistol | Sınırsız | Dengeli |
+| Shotgun | 6 × 4 | 5 saçma, yakın mesafe |
+| Rifle | 30 × 4 | Hızlı ateş, yüksek DPS |
+| Rocket Launcher | 1 × 4 | Boss'tan sonra açılır (tuş 4) |
 
-## Proje yapısı
+Zombiler ölünce şansla **mermi** (sarı) veya **can** (kırmızı) paketi düşürür.
+
+## Ayarlar (ana menü → SETTINGS)
+
+Ses seviyesi · Crosshair stili (Classic/Dot/Cross/Off) · Karakter rengi (Green/Blue/Red/Grey) · FPS göstergesi — hepsi `user://save_data.json` içinde kalıcı.
+
+## Teknik notlar
+
+- Tüm görseller ve sesler **prosedürel olarak üretildi** (Python: PIL + wave modülü). Hiç dış asset yok.
+- El feneri `Tunnel.gd` içinde kod ile oluşturulur (`PointLight2D.new()`), sahne dosyasına gömülü değil.
+- `DialogueBox.gd` sahne geçişlerinde `get_viewport()` null kontrolü ve `is_inside_tree()` koruması içerir.
+
+## Yapı
 
 ```
 zombie_survival/
 ├── project.godot
-├── audio/                # Prosedürel üretilmiş .wav ses efektleri
-├── sprites/               # Prosedürel üretilmiş .png karakter/UI/portre/dekor görselleri
-├── scenes/
-│   ├── MainMenu.tscn, Settings.tscn
-│   ├── Main.tscn, Hospital.tscn, Checkpoint.tscn, Subway.tscn, Tunnel.tscn
-│   ├── DialogueBox.tscn, Npc.tscn, Ally.tscn, Obstacle.tscn
-│   ├── Player.tscn, Zombie.tscn, Boss.tscn, Bullet.tscn, BossProjectile.tscn
-│   ├── PowerUp.tscn, Loot.tscn, DiaryLog.tscn
-└── scripts/
-    ├── SFX.gd, SaveData.gd          # Autoload'lar
-    ├── Story.gd                     # Tum diyalog verileri
-    ├── DialogueBox.gd, Npc.gd, Ally.gd, Obstacle.gd
-    ├── MainMenu.gd, Settings.gd
-    ├── Main.gd, Hospital.gd, Checkpoint.gd, Subway.gd, Tunnel.gd
-    ├── Player.gd, Zombie.gd, Boss.gd, Bullet.gd, BossProjectile.gd
-    └── PowerUp.gd, Loot.gd, DiaryLog.gd
+├── audio/     # 9 prosedürel .wav
+├── sprites/   # 13 karakter + 28 UI/dekor .png
+├── scenes/    # 22 .tscn
+└── scripts/   # 25 .gd
 ```
 
-## Sıradaki yapılacaklar (todo)
+## Sıradaki
 
-1. Bölüm 5-6: Refugee Camp Outskirts, Stadium (final — Sarah ve Emma'ya kavuşma)
-2. Görsel/animasyon iyileştirmeleri (bu iskelet tamamlanınca planlanan)
-3. Kill streak/combo skor sistemi
-4. Minimap/radar
+1. Görsel/animasyon cilası (yürüme animasyonları, parçacık efektleri, ekran sarsıntısı)
+2. Kill streak / combo skor
+3. Minimap / radar
+4. Bölümler arası silah/geliştirme seçimi ekranı

@@ -1,61 +1,61 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=28 format=3]
 
-[ext_resource type="Script" path="res://scripts/Checkpoint.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
-[ext_resource type="Script" path="res://scripts/HUD.gd" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/DialogueBox.tscn" id="4"]
-[ext_resource type="Texture2D" path="res://sprites/ui/checkpoint_bg.png" id="5"]
-[ext_resource type="PackedScene" path="res://scenes/Npc.tscn" id="6"]
-[ext_resource type="Texture2D" path="res://sprites/npc_briggs.png" id="7"]
-[ext_resource type="PackedScene" path="res://scenes/Obstacle.tscn" id="8"]
-[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_sandbag.png" id="9"]
-[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_truck.png" id="10"]
-[ext_resource type="PackedScene" path="res://scenes/Ally.tscn" id="11"]
-[ext_resource type="Texture2D" path="res://sprites/npc_soldier.png" id="12"]
+[ext_resource type="Script" path="res://scripts/Checkpoint.gd" id="lvl"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="player"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="hud"]
+[ext_resource type="PackedScene" path="res://scenes/DialogueBox.tscn" id="dlg"]
+[ext_resource type="Texture2D" path="res://sprites/ui/checkpoint_bg.png" id="bg"]
+[ext_resource type="PackedScene" path="res://scenes/Npc.tscn" id="npc"]
+[ext_resource type="Texture2D" path="res://sprites/npc_briggs.png" id="briggs_tex"]
+[ext_resource type="PackedScene" path="res://scenes/Obstacle.tscn" id="obs"]
+[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_sandbag.png" id="sandbag"]
+[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_truck.png" id="truck"]
+[ext_resource type="PackedScene" path="res://scenes/Ally.tscn" id="ally"]
+[ext_resource type="Texture2D" path="res://sprites/npc_soldier.png" id="soldier"]
 
 [sub_resource type="RectangleShape2D" id="truck_shape"]
 size = Vector2(100, 60)
 
 [node name="Checkpoint" type="Node2D"]
-script = ExtResource("1")
+script = ExtResource("lvl")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(576, 324)
-texture = ExtResource("5")
+texture = ExtResource("bg")
 
-[node name="Player" parent="." instance=ExtResource("2")]
+[node name="Player" parent="." instance=ExtResource("player")]
 position = Vector2(576, 550)
 
-[node name="Briggs" parent="." instance=ExtResource("6")]
+[node name="Briggs" parent="." instance=ExtResource("npc")]
 position = Vector2(760, 230)
-texture = ExtResource("7")
+texture = ExtResource("briggs_tex")
 
-[node name="Truck1" parent="." instance=ExtResource("8")]
+[node name="Truck1" parent="." instance=ExtResource("obs")]
 position = Vector2(576, 190)
-texture = ExtResource("10")
+texture = ExtResource("truck")
 
 [node name="CollisionShape2D" parent="Truck1"]
 shape = SubResource("truck_shape")
 
-[node name="Sandbag1" parent="." instance=ExtResource("8")]
+[node name="Sandbag1" parent="." instance=ExtResource("obs")]
 position = Vector2(300, 360)
-texture = ExtResource("9")
+texture = ExtResource("sandbag")
 
-[node name="Sandbag2" parent="." instance=ExtResource("8")]
+[node name="Sandbag2" parent="." instance=ExtResource("obs")]
 position = Vector2(860, 360)
-texture = ExtResource("9")
+texture = ExtResource("sandbag")
 
-[node name="Sandbag3" parent="." instance=ExtResource("8")]
+[node name="Sandbag3" parent="." instance=ExtResource("obs")]
 position = Vector2(576, 460)
-texture = ExtResource("9")
+texture = ExtResource("sandbag")
 
-[node name="Ally1" parent="." instance=ExtResource("11")]
+[node name="Ally1" parent="." instance=ExtResource("ally")]
 position = Vector2(300, 320)
-texture = ExtResource("12")
+texture = ExtResource("soldier")
 
-[node name="Ally2" parent="." instance=ExtResource("11")]
+[node name="Ally2" parent="." instance=ExtResource("ally")]
 position = Vector2(860, 320)
-texture = ExtResource("12")
+texture = ExtResource("soldier")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -66,10 +66,10 @@ wait_time = 9.0
 autostart = true
 one_shot = false
 
-[node name="DialogueBox" parent="." instance=ExtResource("4")]
+[node name="DialogueBox" parent="." instance=ExtResource("dlg")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("3")
+script = ExtResource("hud")
 
 [node name="HealthLabel" type="Label" parent="HUD"]
 offset_left = 20.0
@@ -103,10 +103,10 @@ text = "Best: 0"
 [node name="WeaponLabel" type="Label" parent="HUD"]
 offset_left = 20.0
 offset_top = 136.0
-offset_right = 460.0
+offset_right = 470.0
 offset_bottom = 166.0
 theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
-text = "Weapon: Pistol  (1/2/3 to switch, R to reload)"
+text = "Weapon: Pistol  (1-4 switch, R reload)"
 
 [node name="AmmoLabel" type="Label" parent="HUD"]
 offset_left = 20.0
@@ -143,6 +143,45 @@ horizontal_alignment = 1
 [node name="BossHealthBar" type="ProgressBar" parent="HUD/BossHealthContainer"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 18)
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="ObjectiveContainer" type="VBoxContainer" parent="HUD"]
+offset_left = 326.0
+offset_top = 70.0
+offset_right = 826.0
+offset_bottom = 150.0
+theme_override_constants/separation = 3
+
+[node name="ObjectiveLabel" type="Label" parent="HUD/ObjectiveContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "EVACUATION IN PROGRESS"
+horizontal_alignment = 1
+
+[node name="ObjectiveProgress" type="ProgressBar" parent="HUD/ObjectiveContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 16)
+max_value = 100.0
+value = 0.0
+show_percentage = false
+
+[node name="ObjectiveHealthLabel" type="Label" parent="HUD/ObjectiveContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.55, 0.5, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+text = "BUS INTEGRITY"
+horizontal_alignment = 1
+
+[node name="ObjectiveHealthBar" type="ProgressBar" parent="HUD/ObjectiveContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 14)
 max_value = 100.0
 value = 100.0
 show_percentage = false
@@ -197,7 +236,6 @@ autowrap_mode = 2
 
 [node name="NextChapterButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-visible = false
 text = "Go to Chapter 4"
 
 [node name="ContinueButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]

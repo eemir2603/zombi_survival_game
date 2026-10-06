@@ -1,12 +1,27 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=30 format=3]
 
-[ext_resource type="Script" path="res://scripts/Main.gd" id="lvl"]
+[ext_resource type="Script" path="res://scripts/Camp.gd" id="lvl"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="player"]
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="hud"]
 [ext_resource type="PackedScene" path="res://scenes/DialogueBox.tscn" id="dlg"]
-[ext_resource type="Texture2D" path="res://sprites/ui/street_bg.png" id="bg"]
+[ext_resource type="Texture2D" path="res://sprites/ui/camp_bg.png" id="bg"]
+[ext_resource type="PackedScene" path="res://scenes/Npc.tscn" id="npc"]
+[ext_resource type="Texture2D" path="res://sprites/npc_maya.png" id="maya_tex"]
+[ext_resource type="PackedScene" path="res://scenes/Obstacle.tscn" id="obs"]
+[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_tent.png" id="tent"]
+[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_barrel.png" id="barrel"]
+[ext_resource type="PackedScene" path="res://scenes/Ally.tscn" id="ally"]
+[ext_resource type="Texture2D" path="res://sprites/npc_civilian.png" id="civ"]
+[ext_resource type="Texture2D" path="res://sprites/ui/blood_stain.png" id="blood"]
+[ext_resource type="Texture2D" path="res://sprites/ui/corpse_human.png" id="c_human"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="tent_shape"]
+size = Vector2(88, 56)
+
+[sub_resource type="CircleShape2D" id="barrel_shape"]
+radius = 18.0
+
+[node name="Camp" type="Node2D"]
 script = ExtResource("lvl")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -14,14 +29,77 @@ position = Vector2(576, 324)
 texture = ExtResource("bg")
 
 [node name="Player" parent="." instance=ExtResource("player")]
-position = Vector2(576, 324)
+position = Vector2(400, 400)
+
+[node name="Maya" parent="." instance=ExtResource("npc")]
+position = Vector2(300, 300)
+texture = ExtResource("maya_tex")
+
+[node name="Tent1" parent="." instance=ExtResource("obs")]
+position = Vector2(180, 380)
+texture = ExtResource("tent")
+
+[node name="CollisionShape2D" parent="Tent1"]
+shape = SubResource("tent_shape")
+
+[node name="Tent2" parent="." instance=ExtResource("obs")]
+position = Vector2(180, 520)
+texture = ExtResource("tent")
+
+[node name="CollisionShape2D" parent="Tent2"]
+shape = SubResource("tent_shape")
+
+[node name="Tent3" parent="." instance=ExtResource("obs")]
+position = Vector2(340, 520)
+texture = ExtResource("tent")
+
+[node name="CollisionShape2D" parent="Tent3"]
+shape = SubResource("tent_shape")
+
+[node name="Barrel1" parent="." instance=ExtResource("obs")]
+position = Vector2(660, 250)
+texture = ExtResource("barrel")
+
+[node name="CollisionShape2D" parent="Barrel1"]
+shape = SubResource("barrel_shape")
+
+[node name="Barrel2" parent="." instance=ExtResource("obs")]
+position = Vector2(720, 320)
+texture = ExtResource("barrel")
+
+[node name="CollisionShape2D" parent="Barrel2"]
+shape = SubResource("barrel_shape")
+
+[node name="Barrel3" parent="." instance=ExtResource("obs")]
+position = Vector2(660, 400)
+texture = ExtResource("barrel")
+
+[node name="CollisionShape2D" parent="Barrel3"]
+shape = SubResource("barrel_shape")
+
+[node name="Ally1" parent="." instance=ExtResource("ally")]
+position = Vector2(880, 250)
+texture = ExtResource("civ")
+
+[node name="Ally2" parent="." instance=ExtResource("ally")]
+position = Vector2(880, 420)
+texture = ExtResource("civ")
+
+[node name="BloodStain1" type="Sprite2D" parent="."]
+position = Vector2(980, 180)
+texture = ExtResource("blood")
+
+[node name="Corpse1" type="Sprite2D" parent="."]
+position = Vector2(1000, 200)
+rotation = 0.8
+texture = ExtResource("c_human")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 0.65
 one_shot = false
 
 [node name="PowerUpTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 8.5
 autostart = true
 one_shot = false
 
@@ -189,13 +267,13 @@ offset_bottom = 260.0
 theme_override_constants/separation = 12
 
 [node name="ChapterLabel" type="Label" parent="HUD/ChapterCompletePanel/VBoxContainer"]
-text = "CHAPTER 1 COMPLETE"
+text = "CHAPTER 5 COMPLETE"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="NextChapterButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Go to Chapter 2"
+text = "Go to Chapter 6"
 
 [node name="ContinueButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)

@@ -25,14 +25,14 @@ func _ready():
 	player.health_changed.connect(_on_player_health_changed)
 	player.died.connect(_on_player_died)
 	player.weapon_changed.connect(hud.update_weapon)
+	player.ammo_changed.connect(hud.update_ammo)
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	powerup_timer.timeout.connect(_on_powerup_timer_timeout)
 	hud.continue_endless_requested.connect(_on_continue_endless)
-	player.ammo_changed.connect(hud.update_ammo)
 	hud.update_score(score)
 
-	briggs.interacted.connect(_on_briggs_interacted)
-	spawn_diary_logs()
+	briggs.interacted.connect(_on_npc_interacted)
+	spawn_notes()
 	play_intro_story()
 
 func play_intro_story():
@@ -43,15 +43,15 @@ func play_intro_story():
 	briggs.dialogue_lines = Story.chapter3_briggs_repeat()
 	start_wave()
 
-func _on_briggs_interacted(lines):
+func _on_npc_interacted(lines):
 	dialogue_box.show_dialogue(lines)
 
-func spawn_diary_logs():
-	var logs = [Story.diary_log_6(), Story.diary_log_7()]
+func spawn_notes():
+	var notes = [Story.diary_log_6(), Story.diary_log_7()]
 	var positions = [Vector2(160, 470), Vector2(1000, 470)]
-	for i in logs.size():
+	for i in notes.size():
 		var d = DiaryLogScene.instantiate()
-		d.log_lines = logs[i]
+		d.log_lines = notes[i]
 		add_child(d)
 		d.global_position = positions[i]
 		d.log_collected.connect(_on_log_collected)

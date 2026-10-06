@@ -1,27 +1,88 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Script" path="res://scripts/Main.gd" id="lvl"]
+[ext_resource type="Script" path="res://scripts/Stadium.gd" id="lvl"]
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="player"]
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="hud"]
 [ext_resource type="PackedScene" path="res://scenes/DialogueBox.tscn" id="dlg"]
-[ext_resource type="Texture2D" path="res://sprites/ui/street_bg.png" id="bg"]
+[ext_resource type="Texture2D" path="res://sprites/ui/stadium_bg.png" id="bg"]
+[ext_resource type="PackedScene" path="res://scenes/Npc.tscn" id="npc"]
+[ext_resource type="Texture2D" path="res://sprites/npc_sarah.png" id="sarah_tex"]
+[ext_resource type="Texture2D" path="res://sprites/npc_emma.png" id="emma_tex"]
+[ext_resource type="PackedScene" path="res://scenes/Objective.tscn" id="obj"]
+[ext_resource type="Texture2D" path="res://sprites/ui/evac_bus.png" id="bus_tex"]
+[ext_resource type="PackedScene" path="res://scenes/Obstacle.tscn" id="obs"]
+[ext_resource type="Texture2D" path="res://sprites/ui/obstacle_barrier.png" id="barrier"]
+[ext_resource type="Texture2D" path="res://sprites/ui/blood_stain.png" id="blood"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="barrier_shape"]
+size = Vector2(80, 30)
+
+[node name="Stadium" type="Node2D"]
 script = ExtResource("lvl")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(576, 324)
 texture = ExtResource("bg")
 
+[node name="EvacBus" parent="." instance=ExtResource("obj")]
+position = Vector2(880, 470)
+texture = ExtResource("bus_tex")
+max_health = 700
+
 [node name="Player" parent="." instance=ExtResource("player")]
-position = Vector2(576, 324)
+position = Vector2(576, 400)
+
+[node name="Sarah" parent="." instance=ExtResource("npc")]
+position = Vector2(770, 430)
+texture = ExtResource("sarah_tex")
+
+[node name="Emma" parent="." instance=ExtResource("npc")]
+position = Vector2(812, 432)
+texture = ExtResource("emma_tex")
+
+[node name="Barrier1" parent="." instance=ExtResource("obs")]
+position = Vector2(400, 300)
+texture = ExtResource("barrier")
+
+[node name="CollisionShape2D" parent="Barrier1"]
+shape = SubResource("barrier_shape")
+
+[node name="Barrier2" parent="." instance=ExtResource("obs")]
+position = Vector2(620, 250)
+texture = ExtResource("barrier")
+
+[node name="CollisionShape2D" parent="Barrier2"]
+shape = SubResource("barrier_shape")
+
+[node name="Barrier3" parent="." instance=ExtResource("obs")]
+position = Vector2(300, 470)
+texture = ExtResource("barrier")
+
+[node name="CollisionShape2D" parent="Barrier3"]
+shape = SubResource("barrier_shape")
+
+[node name="Barrier4" parent="." instance=ExtResource("obs")]
+position = Vector2(700, 340)
+texture = ExtResource("barrier")
+
+[node name="CollisionShape2D" parent="Barrier4"]
+shape = SubResource("barrier_shape")
+
+[node name="BloodStain1" type="Sprite2D" parent="."]
+position = Vector2(480, 360)
+texture = ExtResource("blood")
+
+[node name="BloodStain2" type="Sprite2D" parent="."]
+position = Vector2(900, 300)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("blood")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 0.6
 one_shot = false
 
 [node name="PowerUpTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 8.0
 autostart = true
 one_shot = false
 
@@ -189,13 +250,14 @@ offset_bottom = 260.0
 theme_override_constants/separation = 12
 
 [node name="ChapterLabel" type="Label" parent="HUD/ChapterCompletePanel/VBoxContainer"]
-text = "CHAPTER 1 COMPLETE"
+text = "COMING HOME  -  COMPLETE"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="NextChapterButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
-text = "Go to Chapter 2"
+visible = false
+text = "Continue"
 
 [node name="ContinueButton" type="Button" parent="HUD/ChapterCompletePanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)

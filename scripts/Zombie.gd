@@ -6,7 +6,7 @@ enum ZombieType { NORMAL, FAST, TANKY }
 @export var zombie_type: ZombieType = ZombieType.NORMAL
 @export var damage: int = 10
 @export var attack_cooldown: float = 1.0
-@export var attack_range: float = 40.0  # fiziksel collision yaricaplari toplamindan (17+15=32) buyuk olmali, yoksa zombi hic bu mesafeye giremez
+@export var attack_range: float = 40.0
 
 @export var texture_normal: Texture2D
 @export var texture_fast: Texture2D
@@ -18,7 +18,11 @@ var health: int
 var attack_timer: float = 0.0
 var groan_timer: float = 0.0
 var player: Node2D = null
+var objective: Node2D = null
 var is_dying: bool = false
+
+# true ise zombi oyuncu yerine hedefe (tahliye otobusu) saldirir
+@export var targets_objective: bool = false
 var bob_offset: float = 0.0
 
 @onready var sprite = $Sprite2D
@@ -46,29 +50,45 @@ func _ready():
 			damage = 18
 			sprite.texture = texture_tanky
 			scale = Vector2(1.2, 1.2)
-			attack_range = 46.0  # daha buyuk govde, daha genis erisim
+			attack_range = 46.0
 
 	speed += randf_range(-10.0, 10.0)
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
+	if targets_objective:
+		objective = get_tree().get_first_node_in_group("objective")
+
+func current_target() -> Node2D:
+	# hedefe kilitli zombi once otobusu dener, yoksa oyuncuya doner
+	if targets_objective and objective != null and is_instance_valid(objective) and not objective.is_destroyed:
+		return objective
+	if player != null and is_instance_valid(player):
+		return player
+	return null
 
 func _physics_process(delta):
-	if player == null or not is_instance_valid(player):
+	var target = current_target()
+	if target == null:
+		velocity = Vector2.ZERO
 		return
 
-	var dir = (player.global_position - global_position).normalized()
+	var dir = (target.global_position - global_position).normalized()
 	velocity = dir * speed
 	move_and_slide()
 
-	look_at(player.global_position)
+	look_at(target.global_position)
 
 	var bob = sin(Time.get_ticks_msec() / 1000.0 * 8.0 + bob_offset) * 0.06
 	sprite.scale = Vector2(1.0 + bob, 1.0 - bob)
 
+	var reach = attack_range
+	if target == objective:
+		reach = attack_range + 70.0  # otobus govdesi genis
+
 	attack_timer -= delta
-	if global_position.distance_to(player.global_position) < attack_range and attack_timer <= 0:
-		if player.has_method("take_damage"):
-			player.take_damage(damage)
+	if global_position.distance_to(target.global_position) < reach and attack_timer <= 0:
+		if target.has_method("take_damage"):
+			target.take_damage(damage)
 		attack_timer = attack_cooldown
 
 	groan_timer -= delta

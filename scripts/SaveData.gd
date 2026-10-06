@@ -8,7 +8,7 @@ var player_color: String = "green"
 var show_fps: bool = false
 var volume: float = 1.0
 var has_rocket_launcher: bool = false
-var carry_score: int = 0  # sahneler arasi (Subway -> Tunnel) skor tasima, diske kaydedilmez
+var carry_score: int = 0
 
 func _ready():
 	load_data()

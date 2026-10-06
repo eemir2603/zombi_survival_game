@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var spawn_margin: float = 50.0
-const CHAPTER_TARGET_WAVE = 4
+const CHAPTER_TARGET_WAVE = 6
 
 const ZombieScene = preload("res://scenes/Zombie.tscn")
 const PowerUpScene = preload("res://scenes/PowerUp.tscn")
@@ -19,9 +19,10 @@ var chapter_complete: bool = false
 @onready var spawn_timer = $SpawnTimer
 @onready var powerup_timer = $PowerUpTimer
 @onready var dialogue_box = $DialogueBox
-@onready var diane = $Diane
+@onready var maya = $Maya
 
 func _ready():
+	score = SaveData.carry_score
 	player.health_changed.connect(_on_player_health_changed)
 	player.died.connect(_on_player_died)
 	player.weapon_changed.connect(hud.update_weapon)
@@ -31,24 +32,24 @@ func _ready():
 	hud.continue_endless_requested.connect(_on_continue_endless)
 	hud.update_score(score)
 
-	diane.interacted.connect(_on_npc_interacted)
+	maya.interacted.connect(_on_npc_interacted)
 	spawn_notes()
 	play_intro_story()
 
 func play_intro_story():
-	dialogue_box.show_dialogue(Story.chapter2_intro())
+	dialogue_box.show_dialogue(Story.chapter5_intro())
 	await dialogue_box.finished
-	dialogue_box.show_dialogue(Story.chapter2_diane_dialogue())
+	dialogue_box.show_dialogue(Story.chapter5_maya_dialogue())
 	await dialogue_box.finished
-	diane.dialogue_lines = Story.chapter2_diane_repeat()
+	maya.dialogue_lines = Story.chapter5_maya_repeat()
 	start_wave()
 
 func _on_npc_interacted(lines):
 	dialogue_box.show_dialogue(lines)
 
 func spawn_notes():
-	var notes = [Story.diary_log_4(), Story.diary_log_5()]
-	var positions = [Vector2(180, 500), Vector2(980, 160)]
+	var notes = [Story.diary_log_8(), Story.diary_log_9(), Story.diary_log_10()]
+	var positions = [Vector2(150, 180), Vector2(1000, 520), Vector2(576, 560)]
 	for i in notes.size():
 		var d = DiaryLogScene.instantiate()
 		d.log_lines = notes[i]
@@ -60,7 +61,7 @@ func _on_log_collected(lines):
 	dialogue_box.show_dialogue(lines)
 
 func start_wave():
-	zombies_to_spawn = 4 + wave * 2
+	zombies_to_spawn = 5 + wave * 2
 	zombies_alive = 0
 	hud.update_wave(wave)
 	SFX.play("wave_start", -4.0)
@@ -83,9 +84,9 @@ func spawn_zombie():
 
 func pick_zombie_type():
 	var roll = randf()
-	if wave >= 3 and roll < 0.25:
+	if roll < 0.3:
 		return Zombie.ZombieType.TANKY
-	elif roll < 0.5:
+	elif roll < 0.6:
 		return Zombie.ZombieType.FAST
 	return Zombie.ZombieType.NORMAL
 
@@ -139,9 +140,10 @@ func trigger_chapter_complete():
 	powerup_timer.stop()
 	var timer = get_tree().create_timer(1.0)
 	await timer.timeout
-	dialogue_box.show_dialogue(Story.chapter2_outro())
+	dialogue_box.show_dialogue(Story.chapter5_outro())
 	await dialogue_box.finished
-	hud.show_chapter_complete(score, "CHAPTER 2 COMPLETE", "res://scenes/Checkpoint.tscn")
+	SaveData.carry_score = score
+	hud.show_chapter_complete(score, "CHAPTER 5 COMPLETE", "res://scenes/Stadium.tscn")
 
 func _on_continue_endless():
 	wave += 1

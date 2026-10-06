@@ -39,7 +39,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.42, 0.72, 0.36, 1)
 
-[sub_resource type="StyleBoxFlat" id="btn_neutral_normal"]
+[sub_resource type="StyleBoxFlat" id="btn_neutral"]
 bg_color = Color(0.2, 0.2, 0.24, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -63,7 +63,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.7, 0.7, 0.78, 1)
 
-[sub_resource type="StyleBoxFlat" id="btn_quit_normal"]
+[sub_resource type="StyleBoxFlat" id="btn_quit"]
 bg_color = Color(0.32, 0.14, 0.14, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
@@ -158,16 +158,16 @@ text = "START"
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("btn_neutral_normal")
+theme_override_styles/normal = SubResource("btn_neutral")
 theme_override_styles/hover = SubResource("btn_neutral_hover")
-theme_override_styles/pressed = SubResource("btn_neutral_normal")
+theme_override_styles/pressed = SubResource("btn_neutral")
 text = "SETTINGS"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("btn_quit_normal")
+theme_override_styles/normal = SubResource("btn_quit")
 theme_override_styles/hover = SubResource("btn_quit_hover")
-theme_override_styles/pressed = SubResource("btn_normal")
+theme_override_styles/pressed = SubResource("btn_quit")
 text = "QUIT"
