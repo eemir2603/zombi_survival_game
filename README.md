@@ -3,7 +3,7 @@
 
 # A story-driven, top-down twin-stick shooter and zombie survival game, built with Godot 4.3+.
 
-#The Story
+# The Story
 
 Ryan Cole is a former soldier turned security contractor. He was on duty when the outbreak first hit. By the time the city went into full lockdown, he was completely cut off from his wife, Sarah, and their daughter, Emma. Now, he has to fight his way across the ruins of a collapsed city to find them and bring them home.
  
