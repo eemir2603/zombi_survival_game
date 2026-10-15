@@ -20,15 +20,15 @@ Ryan Cole is a former soldier turned security contractor. He was on duty when th
  You can play on itchio
 
 # Controls
-Key / Input	Action
-WASD	- Movement
-Mouse -	Aim (crosshair style can be changed in Settings)
-Left Click	- Shoot
-R -	Reload
-E	- Interact / Talk to NPCs
-F -	Toggle Flashlight (Tunnel level only)
-1 / 2 / 3 / 4	- Switch Weapons
-Click / SPACE	- Advance dialogue
+* Key / Input	Action
+* WASD	- Movement
+* Mouse -	Aim (crosshair style can be changed in Settings)
+* Left Click	- Shoot
+* R -	Reload
+* E	- Interact / Talk to NPCs
+* F -	Toggle Flashlight (Tunnel level only)
+* 1 / 2 / 3 / 4	- Switch Weapons
+* Click / SPACE	- Advance dialogue
 
 # Chapters
 
