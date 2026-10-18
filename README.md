@@ -95,6 +95,8 @@ zombie_survival/
 
   2.Scoring: Adding kill streaks and a combo score multiplier.
 
+  Also you can play on itch.io!
+
   3.UI Enhancements: Adding a minimap / radar.
 
   4.Progression: An intermission screen between chapters for weapon selection and upgrades.
